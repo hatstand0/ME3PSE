@@ -481,7 +481,7 @@ namespace ME3Server_WV
                     TcpClient tcpClient = RedirectorListener.AcceptTcpClient();
                     Logger.Log("[Redirector] New client connected", Color.DarkGreen);
                     SslStream clientStream = new SslStream(tcpClient.GetStream(), true);
-                    clientStream.AuthenticateAsServer(RedirectorCert, false, SslProtocols.Ssl3, false);
+                    clientStream.AuthenticateAsServer(RedirectorCert, false, SslProtocols.Ssl3 | SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12, false);
                     Thread tHandler = new Thread(threadRedirectorClientHandler);
                     RedirectorHandlerStruct h = new RedirectorHandlerStruct();
                     h.stream = clientStream;
